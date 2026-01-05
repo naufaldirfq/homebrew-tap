@@ -9,19 +9,19 @@ cask "mcp-manager" do
 
   app "MCP Manager.app"
 
+  postflight do
+    system_command "xattr",
+                   args: ["-rd", "com.apple.quarantine", "#{appdir}/MCP Manager.app"],
+                   sudo: false
+  end
+
   zap trash: [
     "~/Library/Application Support/com.mcp-manager.app",
     "~/Library/Saved Application State/com.mcp-manager.app.savedState",
   ]
 
-  caveats do
-    <<~EOS
-      Input monitor and other permissions may need to be enabled manually
-      in System Preferences > Security & Privacy.
-
-      If you see the error "MCP Manager is damaged and can't be opened",
-      run the following command:
-        xattr -cr "/Applications/MCP Manager.app"
-    EOS
-  end
+  caveats <<~EOS
+    Input monitor and other permissions may need to be enabled manually
+    in System Preferences > Security & Privacy.
+  EOS
 end
