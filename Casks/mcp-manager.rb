@@ -13,4 +13,15 @@ cask "mcp-manager" do
     "~/Library/Application Support/com.mcp-manager.app",
     "~/Library/Saved Application State/com.mcp-manager.app.savedState",
   ]
+
+  caveats do
+    <<~EOS
+      Input monitor and other permissions may need to be enabled manually
+      in System Preferences > Security & Privacy.
+
+      If you see the error "MCP Manager is damaged and can't be opened",
+      run the following command:
+        xattr -cr "/Applications/MCP Manager.app"
+    EOS
+  end
 end
